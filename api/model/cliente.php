@@ -3,7 +3,7 @@
 class Cliente
 {
     public $table = 'Cliente';
-    public $fields = 'cliendId
+    public $fields = 'clienId
                 ,clienNombre
                 ,clienDireccion
                 ,CONVERT(VARCHAR, clienFechaAlta, 126) clienFechaAlta
@@ -15,7 +15,7 @@ class Cliente
 
         $sql = "SELECT $this->fields FROM $this->table
                 $this->join
-                WHERE cliendId = ?";
+                WHERE clienId = ?";
         
         $stmt = SQL::query($db, $sql, [ID] );
 
@@ -45,7 +45,7 @@ class Cliente
     public function delete ($db) {
         $stmt = SQL::query($db,
         "UPDATE $this->table SET clienBorrado = 1
-        WHERE cliendId = ?", [ID] );
+        WHERE clienId = ?", [ID] );
 
         sqlsrv_fetch($stmt);
         return [];
@@ -60,7 +60,7 @@ class Cliente
         ,clienBorrado)
         VALUES (?,?,GETDATE(),0);
 
-        SELECT @@IDENTITY cliendId, CONVERT(VARCHAR, GETDATE(), 126) clienFechaAlta;",
+        SELECT @@IDENTITY clienId, CONVERT(VARCHAR, GETDATE(), 126) clienFechaAlta;",
         [DATA["clienNombre"], DATA["clienDireccion"]] );
 
         sqlsrv_fetch($stmt); // INSERT
@@ -68,7 +68,7 @@ class Cliente
         $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
 
         $results = DATA;
-        $results["cliendId"] = $row["cliendId"];
+        $results["clienId"] = $row["clienId"];
         $results["clienFechaAlta"] = $row["clienFechaAlta"];
         $results["clienBorrado"] = 0;
         return $results;
@@ -79,11 +79,11 @@ class Cliente
         "UPDATE Cliente
         SET clienNombre = ?
             ,clienDireccion = ?
-        WHERE cliendId = ?",
+        WHERE clienId = ?",
         [
             DATA["clienNombre"],
             DATA["clienDireccion"],
-            DATA["cliendId"]
+            DATA["clienId"]
         ] );
 
         sqlsrv_fetch($stmt);

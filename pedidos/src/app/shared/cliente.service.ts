@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, map, tap } from 'rxjs/operators';
+import { HttpClient} from '@angular/common/http';
+import { catchError} from 'rxjs/operators';
 
 import { Cliente } from './cliente';
 
@@ -9,6 +9,13 @@ import { Cliente } from './cliente';
   providedIn: 'root'
 })
 export class ClienteService {
+  [x: string]: any;
+  put(seleccionado: Cliente) {
+    throw new Error('Method not implemented.');
+  }
+  post(seleccionado: Cliente) {
+    throw new Error('Method not implemented.');
+  }
 
   private url = 'http://localhost:8888/cliente.php';
 
