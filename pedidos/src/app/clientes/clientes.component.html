@@ -1,0 +1,30 @@
+<table mat-table [dataSource]='clientes' class="mat-elevation-z8" #tabla>
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>
+      <div style="color: rgb(33, 163, 163);"><h3><b>ID Cliente</b></h3></div></th>
+    <td mat-cell *matCellDef="let cliente"> <b>{{cliente.clienId}} </b></td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="nombre">
+    <th mat-header-cell *matHeaderCellDef>
+      <div style="color: rgb(33, 163, 163);"><h3><b>Nombre Cliente</b> </h3></div></th>
+    <td mat-cell *matCellDef="let cliente"> <b>{{cliente.clienNombre}} </b> </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="direccion">
+    <th mat-header-cell *matHeaderCellDef> 
+      <div style="color: rgb(33, 163, 163);"><h3><b>Direccion </b></h3></div></th>
+    <td mat-cell *matCellDef="let cliente"> <b>{{cliente.clienDireccion}}</b> </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef='columnaClie'></tr>
+  <tr mat-row *matRowDef='let row; columns: columnaClie'></tr>
+</table>
+
