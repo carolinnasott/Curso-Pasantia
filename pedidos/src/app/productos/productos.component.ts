@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { ConfirmarComponent } from '../confirmar/confirmar.component';
@@ -12,7 +13,7 @@ import { ProductoService } from '../shared/producto.service';
   templateUrl: './productos.component.html',
   styleUrls: ['./productos.component.css']
 })
-export class ProductosComponent implements OnInit {
+export class ProductosComponent implements OnInit, AfterViewInit {
 
   productos: Producto[] = []; /*items esta en el git*/
   seleccionado = new Producto();
@@ -24,6 +25,7 @@ export class ProductosComponent implements OnInit {
 
 @ViewChild(MatTable) tabla: MatTable<Producto> | undefined;
 @ViewChild(MatSort) sort!: MatSort;
+@ViewChild(MatPaginator) paginator!: MatPaginator;
 
 form = new FormGroup({});
 mostrarFormulario = false;
@@ -31,6 +33,7 @@ mostrarFormulario = false;
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
   ngOnInit(): void {
 
@@ -45,7 +48,7 @@ mostrarFormulario = false;
     this.productoService.get().subscribe(
       (productos) => {
         this.productos = productos;
-        console.log(productos);
+        this.actualizarTabla();
       }
     );
   }
@@ -55,6 +58,10 @@ mostrarFormulario = false;
     this.dataSource.sort = this.sort;
   }
 
+  filter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 
   // tslint:disable-next-line:typedef
   agregar() {

@@ -1,5 +1,12 @@
-<div *ngIf="!mostrarFormulario">
-  <input type="text" class="form-control" name="filterPost" placeholder="Buscar Producto...">
+<br>
+<div [hidden]="mostrarFormulario">
+  
+    <mat-label>Filtrar  </mat-label>
+    <input matInput (keyup)="filter($event)" placeholder="..." #input>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <button mat-raised-button color="primary" (click)="agregar()">Agregar Producto</button>
+
+    <br>
   &nbsp;
 <table mat-table [dataSource]='productos' class="mat-elevation-z8" #tabla>
 
@@ -46,9 +53,13 @@
   
     <tr mat-header-row *matHeaderRowDef='columnaProd'></tr>
     <tr mat-row *matRowDef='let row; columns: columnaProd'></tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No hay datos para el filtro "{{input.value}}"</td>
+    </tr>
   </table>
-  <button mat-raised-button color="primary" (click)="agregar()">Agregar Producto</button>
+  
 </div>
+
 
   <div *ngIf='mostrarFormulario'>
     <br>
@@ -100,5 +111,3 @@
         </form>
     </mat-card>
   </div>
-  
-  

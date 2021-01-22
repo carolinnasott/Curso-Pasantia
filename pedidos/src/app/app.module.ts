@@ -20,7 +20,11 @@ import { ClientesComponent } from './clientes/clientes.component';
 import { PedidosComponent } from './pedidos/pedidos.component';
 import { ConfirmarComponent } from './confirmar/confirmar.component';
 import { MatSortModule } from '@angular/material/sort';
-import { FiltroPipe } from './filtro.pipe';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { PedidoDetallesComponent } from './pedido-detalle/pedido-detalle.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +34,7 @@ import { FiltroPipe } from './filtro.pipe';
     ClientesComponent,
     PedidosComponent,
     ConfirmarComponent,
-    FiltroPipe
+    PedidoDetallesComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +52,12 @@ import { FiltroPipe } from './filtro.pipe';
     MatInputModule,
     MatTableModule,
     MatSortModule,
-    MatDialogModule
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatPaginatorModule
 
   ],
   providers: [],
